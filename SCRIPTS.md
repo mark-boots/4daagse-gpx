@@ -4,14 +4,20 @@ This folder contains PowerShell scripts to automate deployment:
 
 ## Scripts
 
-### `deploy.ps1` - Quick Deploy
-For when you've made changes to files in the `docs/` folder and want to deploy:
+### `generate.ps1` - Generate Static Files
+Process KML files and copy to docs folder (no deployment):
+```powershell
+.\generate.ps1
+```
+
+### `deploy.ps1` - Deploy to GitHub Pages
+Deploy current docs/ folder contents:
 ```powershell
 .\deploy.ps1 "Updated map styling"
 ```
 
-### `update-routes.ps1` - Full Route Update
-For when you have new KML files and need to regenerate everything:
+### `update-routes.ps1` - Full Route Update (Two-Step)
+Generate files, pause for review, then deploy:
 ```powershell
 .\update-routes.ps1 "Added 2026 route data"
 ```
@@ -25,19 +31,26 @@ Then open http://localhost:8000
 
 ## Workflow Examples
 
-### Updating the web app (colors, layout, etc.):
+### Two-step process for new KML files:
+1. Process files: `.\generate.ps1`
+2. Review/edit files in `docs/` folder
+3. Deploy: `.\deploy.ps1 "Added Day 5 routes"`
+
+### Quick frontend changes:
 1. Edit files in `docs/` folder
-2. Test: `.\test-local.ps1`
+2. Test: `.\test-local.ps1` 
 3. Deploy: `.\deploy.ps1 "Improved sidebar design"`
 
-### Adding new KML files:
-1. Add KML files to `kmlfiles/` folder  
-2. Update: `.\update-routes.ps1 "Added Day 5 routes"`
-
-### Quick fixes:
+### Full automated update (with review pause):
 ```powershell
-# Fix typo and deploy
-.\deploy.ps1 "Fixed typo in route names"
+.\update-routes.ps1 "Added 2026 routes"
+# Script will pause for you to review before deploying
+```
+
+### Backend processing only:
+```powershell
+.\generate.ps1
+# Files are ready in docs/, make changes, then deploy later
 ```
 
 ## Notes

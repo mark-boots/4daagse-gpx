@@ -1,4 +1,4 @@
-# Full update script for when you have new KML files
+# Two-step route update: generate files, then deploy separately
 # Usage: .\update-routes.ps1 "Added new 2026 routes"
 
 param(
@@ -6,21 +6,20 @@ param(
     [string]$CommitMessage
 )
 
-Write-Host "🗺️ Updating routes from KML files..." -ForegroundColor Green
+Write-Host "🗺️ Full route update process..." -ForegroundColor Green
 
-# Step 1: Generate static files from KML
-Write-Host "📁 Generating GPX files from KML..." -ForegroundColor Yellow
-npm run generate-static
+# Step 1: Generate files
+Write-Host "📁 Generating static files..." -ForegroundColor Yellow
+.\generate.ps1
 
-# Step 2: Copy to docs folder
-Write-Host "📋 Copying files to docs folder..." -ForegroundColor Yellow
-xcopy public\* docs\ /E /Y
+# Step 2: Pause for review
+Write-Host ""
+Write-Host "⏸️  Files are ready in docs/ folder" -ForegroundColor Yellow
+Write-Host "� Review and make any frontend changes now" -ForegroundColor Cyan
+Write-Host "🚀 Press any key when ready to deploy..." -ForegroundColor Green
+$null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
 
 # Step 3: Deploy
+Write-Host ""
 Write-Host "🚀 Deploying to GitHub Pages..." -ForegroundColor Yellow
-git add .
-git commit -m $CommitMessage
-git push
-
-Write-Host "✅ Routes updated and deployed!" -ForegroundColor Green
-Write-Host "🌐 Site will be live in 2-10 minutes at: https://mark-boots.github.io/4daagse-gpx/" -ForegroundColor Cyan
+.\deploy.ps1 $CommitMessage
