@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="4Daagse2025-Converter" 
+     xmlns="http://www.topografix.com/GPX/1/1"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+  <metadata>
+    <name>Watertappunten - Waypoints</name>
+    <desc>Dag 3 - Groene Donderdag - Watertappunten</desc>
+    <time>2025-07-01T10:44:44.957Z</time>
+  </metadata>
+  <wpt lat="51.797175" lon="5.929922">
+    <name>WP 3.2</name>
+    <desc>beschrijving: &lt;br&gt; Attributes&lt;br&gt;  Dag  3 &lt;br&gt;  Type  Watertappunten &lt;br&gt;  Naam  WP 3.2 &lt;br&gt;Dag: 3&lt;br&gt;Type: Watertappunten&lt;br&gt;Naam: WP 3.2</desc>
+    <type>Waypoint</type>
+  </wpt>
+  <wpt lat="51.754992" lon="5.874582">
+    <name>WP 3.3</name>
+    <desc>beschrijving: &lt;br&gt; Attributes&lt;br&gt;  Dag  3 &lt;br&gt;  Type  Watertappunten &lt;br&gt;  Naam  WP 3.3 &lt;br&gt;Dag: 3&lt;br&gt;Type: Watertappunten&lt;br&gt;Naam: WP 3.3</desc>
+    <type>Waypoint</type>
+  </wpt>
+  <wpt lat="51.729785" lon="5.956818">
+    <name>WP 3.5</name>
+    <desc>beschrijving: &lt;br&gt; Attributes&lt;br&gt;  Dag  3 &lt;br&gt;  Type  Watertappunten &lt;br&gt;  Naam  WP 3.5 &lt;br&gt;Dag: 3&lt;br&gt;Type: Watertappunten&lt;br&gt;Naam: WP 3.5</desc>
+    <type>Waypoint</type>
+  </wpt>
+  <wpt lat="51.7857" lon="5.931103">
+    <name>WP 3.6</name>
+    <desc>beschrijving: &lt;br&gt; Attributes&lt;br&gt;  Dag  3 &lt;br&gt;  Type  Watertappunten &lt;br&gt;  Naam  WP 3.6 &lt;br&gt;Dag: 3&lt;br&gt;Type: Watertappunten&lt;br&gt;Naam: WP 3.6</desc>
+    <type>Waypoint</type>
+  </wpt>
+</gpx>

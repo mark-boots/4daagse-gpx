@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="4Daagse2025-Converter" 
+     xmlns="http://www.topografix.com/GPX/1/1"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+  <metadata>
+    <name>Medische verzorgingsposten - Waypoints</name>
+    <desc>Dag 3 - Groene Donderdag - Medische verzorgingsposten</desc>
+    <time>2025-07-01T10:44:44.957Z</time>
+  </metadata>
+  <wpt lat="51.754992" lon="5.874582">
+    <name>MvP 3.1</name>
+    <desc>beschrijving: &lt;br&gt; Attributes&lt;br&gt;  Dag  3 &lt;br&gt;  Type  Verzorging &lt;br&gt;  Naam  MvP 3.1 &lt;br&gt;Dag: 3&lt;br&gt;Type: Verzorging&lt;br&gt;Naam: MvP 3.1</desc>
+    <type>Medical</type>
+  </wpt>
+  <wpt lat="51.7857" lon="5.931103">
+    <name>MvP 3.4</name>
+    <desc>beschrijving: &lt;br&gt; Attributes&lt;br&gt;  Dag  3 &lt;br&gt;  Type  Verzorging &lt;br&gt;  Naam  MvP 3.4 &lt;br&gt;Dag: 3&lt;br&gt;Type: Verzorging&lt;br&gt;Naam: MvP 3.4</desc>
+    <type>Medical</type>
+  </wpt>
+</gpx>
