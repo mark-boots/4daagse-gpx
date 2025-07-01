@@ -301,6 +301,150 @@
             color: #7f8c8d;
             border-color: #7f8c8d;
         }
+
+        /* Settings Button */
+        .settings-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(52, 73, 94, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            color: white;
+            cursor: pointer;
+            z-index: 1001;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .settings-btn:hover {
+            background: rgba(52, 73, 94, 1);
+            transform: rotate(90deg);
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 0;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: modalSlideIn 0.3s ease;
+        }
+        
+        @keyframes modalSlideIn {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #ecf0f1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h2 {
+            margin: 0;
+            color: #2c3e50;
+            font-size: 1.4rem;
+        }
+        
+        .close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #7f8c8d;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        
+        .close:hover {
+            background: #ecf0f1;
+            color: #2c3e50;
+        }
+        
+        .modal-body {
+            padding: 1.5rem;
+        }
+        
+        .setting-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .setting-group h3 {
+            margin: 0 0 1rem 0;
+            color: #2c3e50;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        .tile-option {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            border: 2px solid #ecf0f1;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .tile-option:hover {
+            border-color: #3498db;
+            background: #f8f9fa;
+        }
+        
+        .tile-option.active {
+            border-color: #3498db;
+            background: #ebf3fd;
+        }
+        
+        .tile-option input[type="radio"] {
+            margin-right: 0.75rem;
+            accent-color: #3498db;
+        }
+        
+        .tile-info {
+            flex: 1;
+        }
+        
+        .tile-name {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.25rem;
+        }
+        
+        .tile-description {
+            font-size: 0.85rem;
+            color: #7f8c8d;
+        }
         
         @media (max-width: 768px) {
             .sidebar {
@@ -320,6 +464,9 @@
             <div class="sidebar-header">
                 <h1>4Daagse 2025</h1>
                 <p>Route en GPX download</p>
+                <button class="settings-btn" id="settingsBtn" title="Instellingen">
+                    <i class="material-icons">settings</i>
+                </button>
             </div>
             
             <div class="sidebar-content">
@@ -345,6 +492,7 @@
     <script>
         // Global variables
         let map;
+        let currentTileLayer;
         let routeLayers = {};
         let routeColors = {
             '30km': '#3498db',      // Blue
@@ -357,18 +505,114 @@
         };
         let allGpxFiles = [];
         
+        // Tile layer definitions
+        const tileLayers = {
+            osm: {
+                name: 'OpenStreetMap',
+                url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                attribution: '© OpenStreetMap contributors'
+            },
+            satellite: {
+                name: 'Satelliet',
+                url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+                attribution: '© Esri & contributors'
+            },
+            topo: {
+                name: 'Topografisch',
+                url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+                attribution: '© OpenTopoMap contributors'
+            },
+            dark: {
+                name: 'Donker Thema',
+                url: 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
+                attribution: '© <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> © <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            },
+            smooth: {
+                name: 'Glad & Schoon',
+                url: 'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png',
+                attribution: '© <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> © <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }
+        };
+        
         // Initialize map
         function initMap() {
             map = L.map('map').setView([51.8426, 5.8518], 11); // Nijmegen center
             
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap contributors'
+            // Set initial tile layer
+            setTileLayer('smooth');
+        }
+        
+        // Set tile layer
+        function setTileLayer(layerKey) {
+            if (currentTileLayer) {
+                map.removeLayer(currentTileLayer);
+            }
+            
+            const layer = tileLayers[layerKey];
+            currentTileLayer = L.tileLayer(layer.url, {
+                attribution: layer.attribution
             }).addTo(map);
+        }
+        
+        // Modal functionality
+        function initModal() {
+            const modal = document.getElementById('settingsModal');
+            const settingsBtn = document.getElementById('settingsBtn');
+            const closeBtn = document.getElementById('closeModal');
+            const tileOptions = document.querySelectorAll('.tile-option');
+            
+            // Open modal
+            settingsBtn.addEventListener('click', () => {
+                modal.style.display = 'block';
+            });
+            
+            // Close modal
+            closeBtn.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', (event) => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+            
+            // Handle tile layer selection
+            tileOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    const tileKey = option.dataset.tile;
+                    const radio = option.querySelector('input[type="radio"]');
+                    
+                    // Update radio selection
+                    radio.checked = true;
+                    
+                    // Update visual selection
+                    tileOptions.forEach(opt => opt.classList.remove('active'));
+                    option.classList.add('active');
+                    
+                    // Change tile layer
+                    setTileLayer(tileKey);
+                    
+                    // Save preference
+                    localStorage.setItem('preferredTileLayer', tileKey);
+                });
+            });
+            
+            // Load saved preference
+            const savedLayer = localStorage.getItem('preferredTileLayer');
+            if (savedLayer && tileLayers[savedLayer]) {
+                const option = document.querySelector(`[data-tile="${savedLayer}"]`);
+                if (option) {
+                    option.click();
+                }
+            }
         }
         
         // Load initial data
         document.addEventListener('DOMContentLoaded', function() {
             initMap();
+            initModal();
             loadGpxFiles();
         });
 
@@ -715,5 +959,61 @@
             document.getElementById('file-groups').innerHTML = `<div class="loading" style="color: #e74c3c;">${message}</div>`;
         }
     </script>
+    
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Instellingen</h2>
+                <button class="close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="setting-group">
+                    <h3>Kaart Stijl</h3>
+                    
+                    <div class="tile-option" data-tile="osm">
+                        <input type="radio" name="tileLayer" value="osm">
+                        <div class="tile-info">
+                            <div class="tile-name">OpenStreetMap</div>
+                            <div class="tile-description">Standaard straatkaart</div>
+                        </div>
+                    </div>
+                    
+                    <div class="tile-option" data-tile="satellite">
+                        <input type="radio" name="tileLayer" value="satellite">
+                        <div class="tile-info">
+                            <div class="tile-name">Satelliet</div>
+                            <div class="tile-description">Luchtfoto's van de route</div>
+                        </div>
+                    </div>
+                    
+                    <div class="tile-option" data-tile="topo">
+                        <input type="radio" name="tileLayer" value="topo">
+                        <div class="tile-info">
+                            <div class="tile-name">Topografisch</div>
+                            <div class="tile-description">Hoogtelijnen en terrein</div>
+                        </div>
+                    </div>
+                    
+                    <div class="tile-option" data-tile="dark">
+                        <input type="radio" name="tileLayer" value="dark">
+                        <div class="tile-info">
+                            <div class="tile-name">Donker Thema</div>
+                            <div class="tile-description">Donkere achtergrond</div>
+                        </div>
+                    </div>
+                    
+                    <div class="tile-option active" data-tile="smooth">
+                        <input type="radio" name="tileLayer" value="smooth" checked>
+                        <div class="tile-info">
+                            <div class="tile-name">Glad & Schoon</div>
+                            <div class="tile-description">Moderne, gladde kaart stijl</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
