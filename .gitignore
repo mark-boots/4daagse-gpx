@@ -7,6 +7,9 @@ node_modules/
 # Generated GPX files (these will be copied to public/gpx/)
 gpx-output/
 
+# Local development batch scripts
+*.bat
+
 # Logs
 *.log
 
