@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4Daagse 2025 Route Viewer</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+        
+        .sidebar {
+            width: auto;
+            min-width: 280px;
+            max-width: 350px;
+            background: #2c3e50;
+            color: white;
+            overflow-y: auto;
+            z-index: 1000;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            flex-shrink: 0;
+        }
+        
+        .sidebar-header {
+            padding: 2rem 1.5rem 1rem;
+            border-bottom: 1px solid #34495e;
+            text-align: center;
+        }
+        
+        .sidebar-header h1 {
+            font-size: 1.8rem;
+            color: #ecf0f1;
+            margin-bottom: 0.5rem;
+        }
+        
+        .sidebar-header p {
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+        
+        .sidebar-content {
+            padding: 0.75rem;
+        }
+        
+        .day-group {
+            margin-bottom: 0.75rem;
+            background: #34495e;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        
+        .day-group-header {
+            padding: 0.75rem;
+            cursor: pointer;
+            user-select: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s ease;
+            color: white;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        
+        .day-group-header::after {
+            content: '▼';
+            position: absolute;
+            right: 0.75rem;
+            transition: transform 0.2s ease;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .day-group-header.collapsed::after {
+            transform: rotate(-90deg);
+        }
+        
+        .day-group-header:hover {
+            filter: brightness(1.1);
+        }
+        
+        .day-group-header.day-1 {
+            background-color: #3498db !important; /* Blue */
+        }
+        
+        .day-group-header.day-2 {
+            background-color: #e91e63 !important; /* Pink */
+        }
+        
+        .day-group-header.day-3 {
+            background-color: #4caf50 !important; /* Green */
+        }
+        
+        .day-group-header.day-4 {
+            background-color: #ff9800 !important; /* Orange */
+        }
+
+        .day-files {
+            padding: 0;
+            max-height: 1000px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .day-files.collapsed {
+            max-height: 0;
+        }
+        
+        .file-item {
+            padding: 0.4rem 0.75rem;
+            border-bottom: 1px solid #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            border-radius: 4px;
+            margin: 0.1rem 0;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        
+        .file-item:hover {
+            transform: translateX(2px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            background-color: rgba(255,255,255,0.05);
+        }
+        
+        .file-item:last-child {
+            border-bottom: none;
+        }
+        
+        .file-checkbox {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+            appearance: none;
+            border: 2px solid;
+            border-radius: 3px;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+        
+        .file-checkbox:checked {
+            background-color: currentColor;
+        }
+        
+        .file-checkbox:checked::after {
+            content: '✓';
+            position: absolute;
+            top: -1px;
+            left: 1px;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .file-info {
+            flex-grow: 1;
+            min-width: 0;
+        }
+        
+        .file-name {
+            font-size: 0.85rem;
+            color: #ecf0f1;
+            margin-bottom: 0;
+            font-weight: 500;
+            word-break: break-word;
+            line-height: 1.2;
+        }
+        
+        .file-meta {
+            font-size: 0.75rem;
+            color: #95a5a6;
+            display: flex;
+            gap: 0.4rem;
+            align-items: center;
+            margin-top: 0.1rem;
+        }
+        
+        .file-type {
+            padding: 0.1rem 0.4rem;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+        
+        .type-track {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .type-poi {
+            background: #f39c12;
+            color: white;
+        }
+        
+        .download-link {
+            color: #3498db;
+            text-decoration: none;
+            font-size: 0.7rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        
+        .download-link:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+        
+        .map-container {
+            flex: 1;
+            position: relative;
+        }
+        
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        
+        .map-controls {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            z-index: 1000;
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .control-btn {
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            padding: 0.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            font-size: 0.8rem;
+            transition: background-color 0.2s ease;
+        }
+        
+        .control-btn:hover {
+            background: white;
+        }
+        
+        .poi-icon {
+            background: white;
+            border: 2px solid;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        .poi-icon.medical {
+            color: #e74c3c;
+            border-color: #e74c3c;
+        }
+        
+        .poi-icon.toilet {
+            color: #27ae60;
+            border-color: #27ae60;
+        }
+        
+        .poi-icon.water {
+            color: #3498db;
+            border-color: #3498db;
+        }
+        
+        .poi-icon.default {
+            color: #7f8c8d;
+            border-color: #7f8c8d;
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 280px;
+            }
+            
+            .sidebar-header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h1>4Daagse 2025</h1>
+                <p>Route en GPX download</p>
+            </div>
+            
+            <div class="sidebar-content">
+                <div id="file-groups">
+                    <div class="loading">Loading routes...</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Map -->
+        <div class="map-container">
+            <div id="map"></div>
+            
+            <!-- Map Controls -->
+            <div class="map-controls">
+                <button class="control-btn" onclick="fitAllRoutes()" title="Toon alle zichtbare routes">📍 Toon Alles</button>
+                <button class="control-btn" onclick="clearAllRoutes()" title="Verwijder alle routes">🗑️ Wissen</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Global variables
+        let map;
+        let routeLayers = {};
+        let routeColors = {
+            '30km': '#3498db',      // Blue
+            '40km': '#f1c40f',      // Yellow  
+            '40kmM': '#27ae60',     // Green for 40km MIL/ML
+            '50km': '#e74c3c',      // Red
+            'Toiletten': '#27ae60', // Green
+            'Medische': '#e74c3c',  // Red
+            'Waterpunten': '#3498db' // Blue
+        };
+        let allGpxFiles = [];
+        
+        // Initialize map
+        function initMap() {
+            map = L.map('map').setView([51.8426, 5.8518], 11); // Nijmegen center
+            
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+        }
+        
+        // Load initial data
+        document.addEventListener('DOMContentLoaded', function() {
+            initMap();
+            loadGpxFiles();
+        });
+
+        async function loadGpxFiles() {
+            try {
+                console.log('Loading GPX files from ./gpx-files.json');
+                const response = await fetch('./gpx-files.json');
+                console.log('Response status:', response.status);
+                const data = await response.json();
+                console.log('Loaded data:', data);
+                
+                if (data.success) {
+                    allGpxFiles = data.files;
+                    console.log('Files loaded:', allGpxFiles.length);
+                    displayFileGroups(allGpxFiles);
+                } else {
+                    showError('Failed to load GPX files: ' + data.error);
+                }
+            } catch (error) {
+                console.error('Error details:', error);
+                showError('Error loading GPX files: ' + error.message);
+            }
+        }
+
+        function displayFileGroups(files) {
+            const container = document.getElementById('file-groups');
+            
+            if (files.length === 0) {
+                container.innerHTML = '<div class="loading">No GPX files found. Convert some KML files first!</div>';
+                return;
+            }
+
+            // Group files by day
+            const groupedFiles = groupFilesByDay(files);
+            
+            const html = Object.keys(groupedFiles).sort().map(dayKey => {
+                const group = groupedFiles[dayKey];
+                const trackFiles = group.files.filter(f => f.type === 'track');
+                const poiFiles = group.files.filter(f => f.type === 'poi');
+                
+                return `
+                    <div class="day-group">
+                        <div class="day-group-header day-${dayKey}" onclick="toggleGroup('${dayKey}')">
+                            <span>${group.displayName}</span>
+                        </div>
+                        <div class="day-files" id="day-${dayKey}">
+                            ${group.files.map(file => `
+                                <div class="file-item" onclick="toggleFileItem('${file.fileName.replace(/[^a-zA-Z0-9]/g, '_')}')">
+                                    <input type="checkbox" class="file-checkbox" 
+                                           id="file-${file.fileName.replace(/[^a-zA-Z0-9]/g, '_')}"
+                                           onchange="toggleRoute('${file.fileName}', this.checked)"
+                                           style="color: ${getRouteColor(file.fileName)}; border-color: ${getRouteColor(file.fileName)};">
+                                    <div class="file-info">
+                                        <div class="file-name">${getDisplayFileName(file.fileName)}</div>
+                                    </div>
+                                    <a href="./gpx/${encodeURIComponent(file.fileName)}" 
+                                       class="download-link" title="Download GPX" onclick="event.stopPropagation();">gpx</a>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            container.innerHTML = html;
+        }
+
+        function groupFilesByDay(files) {
+            const groups = {};
+            
+            files.forEach(file => {
+                const dayMatch = file.fileName.match(/Dag_(\d+)/);
+                const day = dayMatch ? dayMatch[1] : 'Unknown';
+                
+                const dayNames = {
+                    '1': 'Day 1 - Blauwe Dinsdag',
+                    '2': 'Day 2 - Roze Woensdag', 
+                    '3': 'Day 3 - Groene Donderdag',
+                    '4': 'Day 4 - Oranje Vrijdag'
+                };
+                
+                const groupKey = day;
+                
+                if (!groups[groupKey]) {
+                    groups[groupKey] = {
+                        displayName: dayNames[day] || `Day ${day}`,
+                        files: []
+                    };
+                }
+                
+                groups[groupKey].files.push(file);
+            });
+            
+            // Sort files within each group
+            Object.keys(groups).forEach(key => {
+                groups[key].files.sort((a, b) => {
+                    if (a.type !== b.type) {
+                        return a.type === 'track' ? -1 : 1;
+                    }
+                    return a.fileName.localeCompare(b.fileName);
+                });
+            });
+            
+            return groups;
+        }
+
+        function getDayHeaderColor(dayKey) {
+            const dayColors = {
+                '1': '#3498db',    // Day 1: Blue
+                '2': '#e91e63',    // Day 2: Pink  
+                '3': '#4caf50',    // Day 3: Green
+                '4': '#ff9800'     // Day 4: Orange
+            };
+            
+            return dayColors[dayKey] || '#3498db'; // Default to blue
+        }
+
+        function getDisplayFileName(fileName) {
+            let displayName = fileName
+                .replace(/4Daagse2025_-_Dag_\d+_/, '') // Remove prefix
+                .replace('.gpx', ''); // Remove file extension first
+            
+            // Handle specific patterns
+            if (displayName.includes('30km_30km')) {
+                displayName = '30km';
+            } else if (displayName.includes('40km_40km')) {
+                displayName = '40km';
+            } else if (displayName.includes('50km_50km')) {
+                displayName = '50km';
+            } else if (displayName.includes('40kmM')) {
+                displayName = '40km MIL';
+            } else if (displayName.includes('Medische_verzorgingsposten')) {
+                displayName = 'Verzorgingsposten';
+            } else if (displayName.includes('Toiletten')) {
+                displayName = 'Toiletten';
+            } else if (displayName.includes('Waterpunten') || displayName.includes('Watertappunten')) {
+                displayName = 'Waterpunten';
+            } else {
+                // General cleanup for other cases
+                displayName = displayName
+                    .replace(/_track$/, '') // Remove _track suffix
+                    .replace(/_waypoints$/, '') // Remove _waypoints suffix
+                    .replace(/_\w+$/, '') // Remove any other suffix
+                    .replace(/_/g, ' ') // Replace underscores with spaces
+                    .replace(/\b\w/g, l => l.toUpperCase()); // Capitalize words
+            }
+            
+            return displayName;
+        }
+
+        function toggleGroup(dayKey) {
+            const element = document.getElementById(`day-${dayKey}`);
+            const header = element.previousElementSibling;
+            
+            element.classList.toggle('collapsed');
+            header.classList.toggle('collapsed');
+        }
+
+        function toggleFileItem(checkboxId) {
+            const checkbox = document.getElementById(`file-${checkboxId}`);
+            if (checkbox) {
+                checkbox.checked = !checkbox.checked;
+                // Trigger the onchange event manually
+                const event = new Event('change');
+                checkbox.dispatchEvent(event);
+            }
+        }
+
+        async function toggleRoute(fileName, show) {
+            if (show) {
+                await loadAndDisplayRoute(fileName);
+            } else {
+                removeRoute(fileName);
+            }
+        }
+
+        async function loadAndDisplayRoute(fileName) {
+            try {
+                // Show loading state
+                const checkbox = document.getElementById(`file-${fileName.replace(/[^a-zA-Z0-9]/g, '_')}`);
+                const originalLabel = checkbox.nextElementSibling.querySelector('.file-name').textContent;
+                checkbox.nextElementSibling.querySelector('.file-name').textContent = 'Loading...';
+                
+                const response = await fetch(`./gpx/${encodeURIComponent(fileName)}`);
+                const gpxText = await response.text();
+                
+                // Parse GPX and add to map
+                const color = getRouteColor(fileName);
+                const layer = parseAndDisplayGPX(gpxText, color, fileName);
+                
+                if (layer) {
+                    routeLayers[fileName] = layer;
+                    map.addLayer(layer);
+                }
+                
+                // Restore label
+                checkbox.nextElementSibling.querySelector('.file-name').textContent = originalLabel;
+                
+            } catch (error) {
+                console.error('Error loading route:', error);
+                // Uncheck the checkbox on error
+                const checkbox = document.getElementById(`file-${fileName.replace(/[^a-zA-Z0-9]/g, '_')}`);
+                checkbox.checked = false;
+                checkbox.nextElementSibling.querySelector('.file-name').textContent = 'Error loading';
+            }
+        }
+
+        function parseAndDisplayGPX(gpxText, color, fileName) {
+            const parser = new DOMParser();
+            const gpx = parser.parseFromString(gpxText, 'text/xml');
+            
+            const layerGroup = L.layerGroup();
+            
+            // Parse track points
+            const trkpts = gpx.querySelectorAll('trkpt');
+            if (trkpts.length > 0) {
+                const coordinates = Array.from(trkpts).map(pt => [
+                    parseFloat(pt.getAttribute('lat')),
+                    parseFloat(pt.getAttribute('lon'))
+                ]);
+                
+                const polyline = L.polyline(coordinates, {
+                    color: color,
+                    weight: 4,
+                    opacity: 0.8
+                }).bindPopup(`<strong>${getDisplayFileName(fileName)}</strong><br>${coordinates.length} points`);
+                
+                layerGroup.addLayer(polyline);
+            }
+            
+            // Parse waypoints
+            const waypoints = gpx.querySelectorAll('wpt');
+            waypoints.forEach(wpt => {
+                const lat = parseFloat(wpt.getAttribute('lat'));
+                const lon = parseFloat(wpt.getAttribute('lon'));
+                const name = wpt.querySelector('name')?.textContent || 'Waypoint';
+                
+                // Create custom icon based on POI type
+                const iconInfo = getPOIIcon(fileName);
+                const customIcon = L.divIcon({
+                    html: `<div class="poi-icon ${iconInfo.class}"><span class="material-icons">${iconInfo.icon}</span></div>`,
+                    className: 'custom-poi-marker',
+                    iconSize: [32, 32],
+                    iconAnchor: [16, 16],
+                    popupAnchor: [0, -16]
+                });
+                
+                const marker = L.marker([lat, lon], {
+                    icon: customIcon
+                }).bindPopup(`<strong>${name}</strong>`);
+                
+                layerGroup.addLayer(marker);
+            });
+            
+            return layerGroup;
+        }
+
+        function getPOIIcon(fileName) {
+            // Determine icon based on filename
+            if (fileName.toLowerCase().includes('medische') || fileName.toLowerCase().includes('verzorgingsposten')) {
+                return {
+                    icon: 'medical_services',
+                    class: 'medical'
+                };
+            } else if (fileName.toLowerCase().includes('toiletten')) {
+                return {
+                    icon: 'wc',
+                    class: 'toilet'
+                };
+            } else if (fileName.toLowerCase().includes('waterpunten') || fileName.toLowerCase().includes('watertappunten')) {
+                return {
+                    icon: 'water_drop',
+                    class: 'water'
+                };
+            } else {
+                // Default icon for other POI types
+                return {
+                    icon: 'place',
+                    class: 'default'
+                };
+            }
+        }
+
+        function getRouteColor(fileName) {
+            // Handle 40km MIL/ML cases first
+            if (fileName.toLowerCase().includes('40kmm')) {
+                return routeColors['40kmM'];
+            }
+            
+            // Handle water points (both Waterpunten and Watertappunten)
+            if (fileName.toLowerCase().includes('waterpunten') || fileName.toLowerCase().includes('watertappunten')) {
+                return routeColors['Waterpunten'];
+            }
+            
+            // Handle other route types
+            for (const [key, color] of Object.entries(routeColors)) {
+                if (key !== '40kmM' && key !== 'Waterpunten' && fileName.toLowerCase().includes(key.toLowerCase())) {
+                    return color;
+                }
+            }
+            return '#7f8c8d'; // Default gray
+        }
+
+        function removeRoute(fileName) {
+            if (routeLayers[fileName]) {
+                map.removeLayer(routeLayers[fileName]);
+                delete routeLayers[fileName];
+            }
+        }
+
+        function fitAllRoutes() {
+            const allBounds = [];
+            Object.values(routeLayers).forEach(layer => {
+                layer.eachLayer(sublayer => {
+                    if (sublayer.getBounds) {
+                        allBounds.push(sublayer.getBounds());
+                    }
+                });
+            });
+            
+            if (allBounds.length > 0) {
+                const group = new L.featureGroup();
+                allBounds.forEach(bounds => {
+                    L.rectangle(bounds).addTo(group);
+                });
+                map.fitBounds(group.getBounds(), { padding: [20, 20] });
+            }
+        }
+
+        function clearAllRoutes() {
+            // Uncheck all checkboxes
+            document.querySelectorAll('.file-checkbox:checked').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            
+            // Remove all routes from map
+            Object.keys(routeLayers).forEach(fileName => {
+                removeRoute(fileName);
+            });
+        }
+
+        function showError(message) {
+            console.error(message);
+            document.getElementById('file-groups').innerHTML = `<div class="loading" style="color: #e74c3c;">${message}</div>`;
+        }
+    </script>
+</body>
+</html>

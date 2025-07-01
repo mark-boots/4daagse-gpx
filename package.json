@@ -1,0 +1,18 @@
+{
+  "name": "4d25gpx-converter",
+  "version": "1.0.0",
+  "description": "4Daagse 2025 KML to GPX converter and route viewer",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "generate-static": "node generate-static.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "xml2js": "^0.6.2",
+    "axios": "^1.6.2"
+  },
+  "keywords": ["4daagse", "gpx", "kml", "routes", "nijmegen"],
+  "author": "",
+  "license": "MIT"
+}

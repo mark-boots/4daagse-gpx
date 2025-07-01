@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="4Daagse2025-Converter" 
+     xmlns="http://www.topografix.com/GPX/1/1"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+  <metadata>
+    <name>Waterpunten - Waypoints</name>
+    <desc>Dag 1 - Blauwe Dinsdag - Waterpunten</desc>
+    <time>2025-07-01T10:44:42.246Z</time>
+  </metadata>
+  <wpt lat="51.919295" lon="5.826157">
+    <name>WP 1.1</name>
+    <desc>beschrijving: &lt;br&gt; Attributes&lt;br&gt;  Dag  1 &lt;br&gt;  Type  Watertappunten &lt;br&gt;  Naam  WP 1.1 &lt;br&gt;Dag: 1&lt;br&gt;Type: Watertappunten&lt;br&gt;Naam: WP 1.1</desc>
+    <type>Water</type>
+  </wpt>
+  <wpt lat="51.897669" lon="5.785773">
+    <name>WP 1.3</name>
+    <desc>beschrijving: &lt;br&gt; Attributes&lt;br&gt;  Dag  1 &lt;br&gt;  Type  Watertappunten &lt;br&gt;  Naam  WP 1.3 &lt;br&gt;Dag: 1&lt;br&gt;Type: Watertappunten&lt;br&gt;Naam: WP 1.3</desc>
+    <type>Water</type>
+  </wpt>
+  <wpt lat="51.94236" lon="5.86277">
+    <name>WP 1.4</name>
+    <desc>beschrijving: &lt;br&gt; Attributes&lt;br&gt;  Dag  1 &lt;br&gt;  Type  Watertappunten &lt;br&gt;  Naam  WP 1.4 &lt;br&gt;Dag: 1&lt;br&gt;Type: Watertappunten&lt;br&gt;Naam: WP 1.4</desc>
+    <type>Water</type>
+  </wpt>
+  <wpt lat="51.917192" lon="5.856166">
+    <name>WP 1.5</name>
+    <desc>beschrijving: &lt;br&gt; Attributes&lt;br&gt;  Dag  1 &lt;br&gt;  Type  Watertappunten &lt;br&gt;  Naam  WP 1.5 &lt;br&gt;Dag: 1&lt;br&gt;Type: Watertappunten&lt;br&gt;Naam: WP 1.5</desc>
+    <type>Water</type>
+  </wpt>
+  <wpt lat="51.935009" lon="5.940633">
+    <name>WP 1.6</name>
+    <desc>beschrijving: &lt;br&gt; Attributes&lt;br&gt;  Dag  1 &lt;br&gt;  Type  Watertappunten &lt;br&gt;  Naam  WP 1.6 &lt;br&gt;Dag: 1&lt;br&gt;Type: Watertappunten&lt;br&gt;Naam: WP 1.6</desc>
+    <type>Water</type>
+  </wpt>
+  <wpt lat="51.882756" lon="5.88699">
+    <name>WP 1.7</name>
+    <desc>beschrijving: &lt;br&gt; Attributes&lt;br&gt;  Dag  1 &lt;br&gt;  Type  Watertappunten &lt;br&gt;  Naam  WP 1.7 &lt;br&gt;Dag: 1&lt;br&gt;Type: Watertappunten&lt;br&gt;Naam: WP 1.7</desc>
+    <type>Water</type>
+  </wpt>
+</gpx>

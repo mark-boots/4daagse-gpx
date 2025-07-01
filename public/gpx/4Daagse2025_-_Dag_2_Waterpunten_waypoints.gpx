@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="4Daagse2025-Converter" 
+     xmlns="http://www.topografix.com/GPX/1/1"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+  <metadata>
+    <name>Waterpunten - Waypoints</name>
+    <desc>Dag 2 - Roze Woensdag - Waterpunten</desc>
+    <time>2025-07-01T10:44:43.610Z</time>
+  </metadata>
+  <wpt lat="51.803775" lon="5.741315">
+    <name>WP 2.3</name>
+    <desc>beschrijving: Attributes&lt;br&gt; Dag 2 &lt;br&gt; Type Watertappunten &lt;br&gt; Naam WP 2.3 &lt;br&gt;Dag: 2&lt;br&gt;Type: Watertappunten&lt;br&gt;Naam: WP 2.3</desc>
+    <type>Water</type>
+  </wpt>
+  <wpt lat="51.798637" lon="5.68881">
+    <name>WP 2.4</name>
+    <desc>beschrijving: &lt;br&gt; Attributes&lt;br&gt;  Dag  2 &lt;br&gt;  Type  Watertappunten &lt;br&gt;  Naam  WP 2.4 &lt;br&gt;Dag: 2&lt;br&gt;Type: Watertappunten&lt;br&gt;Naam: WP 2.4</desc>
+    <type>Water</type>
+  </wpt>
+  <wpt lat="51.859205" lon="5.79706">
+    <name>WP 2.5</name>
+    <desc>beschrijving: &lt;br&gt; Attributes&lt;br&gt;  Dag  2 &lt;br&gt;  Type  Watertappunten &lt;br&gt;  Naam  WP 2.5 &lt;br&gt;Dag: 2&lt;br&gt;Type: Watertappunten&lt;br&gt;Naam: WP 2.5</desc>
+    <type>Water</type>
+  </wpt>
+  <wpt lat="51.796573" lon="5.66566">
+    <name>WP 2.06</name>
+    <desc>beschrijving: &lt;br&gt; Attributes&lt;br&gt;  Dag  2 &lt;br&gt;  Type  Watertappunten &lt;br&gt;  Naam  WP 2.06 &lt;br&gt;Dag: 2&lt;br&gt;Type: Watertappunten&lt;br&gt;Naam: WP 2.06</desc>
+    <type>Water</type>
+  </wpt>
+  <wpt lat="51.833497" lon="5.745133">
+    <name>WP 2.02</name>
+    <desc>beschrijving: &lt;br&gt; Attributes&lt;br&gt;  Dag  2 &lt;br&gt;  Type  Watertappunten &lt;br&gt;  Naam  WP 2.02 &lt;br&gt;Dag: 2&lt;br&gt;Type: Watertappunten&lt;br&gt;Naam: WP 2.02</desc>
+    <type>Water</type>
+  </wpt>
+  <wpt lat="51.850967" lon="5.839801">
+    <name>WP 2.07</name>
+    <desc>beschrijving: &lt;br&gt; Attributes&lt;br&gt;  Dag  2 &lt;br&gt;  Type  Watertappunten &lt;br&gt;  Naam  WP 2.07 &lt;br&gt;Dag: 2&lt;br&gt;Type: Watertappunten&lt;br&gt;Naam: WP 2.07</desc>
+    <type>Water</type>
+  </wpt>
+</gpx>

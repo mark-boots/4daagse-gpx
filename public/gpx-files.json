@@ -1,0 +1,117 @@
+{
+  "success": true,
+  "files": [
+    {
+      "fileName": "4Daagse2025_-_Dag_1_30km_30km.gpx",
+      "type": "track"
+    },
+    {
+      "fileName": "4Daagse2025_-_Dag_1_40km_40km.gpx",
+      "type": "track"
+    },
+    {
+      "fileName": "4Daagse2025_-_Dag_1_40km_MIL_40kmM.gpx",
+      "type": "track"
+    },
+    {
+      "fileName": "4Daagse2025_-_Dag_1_50km_50km.gpx",
+      "type": "track"
+    },
+    {
+      "fileName": "4Daagse2025_-_Dag_1_Medische_verzorgingsposten_waypoints.gpx",
+      "type": "poi"
+    },
+    {
+      "fileName": "4Daagse2025_-_Dag_1_Toiletten_waypoints.gpx",
+      "type": "poi"
+    },
+    {
+      "fileName": "4Daagse2025_-_Dag_1_Waterpunten_waypoints.gpx",
+      "type": "poi"
+    },
+    {
+      "fileName": "4Daagse2025_-_Dag_2_30km_30km.gpx",
+      "type": "track"
+    },
+    {
+      "fileName": "4Daagse2025_-_Dag_2_40km_40km.gpx",
+      "type": "track"
+    },
+    {
+      "fileName": "4Daagse2025_-_Dag_2_40km_ML_40kmM.gpx",
+      "type": "track"
+    },
+    {
+      "fileName": "4Daagse2025_-_Dag_2_50km_50km.gpx",
+      "type": "track"
+    },
+    {
+      "fileName": "4Daagse2025_-_Dag_2_Medische_verzorgingsposten_waypoints.gpx",
+      "type": "poi"
+    },
+    {
+      "fileName": "4Daagse2025_-_Dag_2_Toiletten_waypoints.gpx",
+      "type": "poi"
+    },
+    {
+      "fileName": "4Daagse2025_-_Dag_2_Waterpunten_waypoints.gpx",
+      "type": "poi"
+    },
+    {
+      "fileName": "4Daagse2025_-_Dag_3_30km_30km.gpx",
+      "type": "track"
+    },
+    {
+      "fileName": "4Daagse2025_-_Dag_3_40km_40km.gpx",
+      "type": "track"
+    },
+    {
+      "fileName": "4Daagse2025_-_Dag_3_40km_MIL_40kmM.gpx",
+      "type": "track"
+    },
+    {
+      "fileName": "4Daagse2025_-_Dag_3_50km_50km.gpx",
+      "type": "track"
+    },
+    {
+      "fileName": "4Daagse2025_-_Dag_3_Medische_verzorgingsposten_waypoints.gpx",
+      "type": "poi"
+    },
+    {
+      "fileName": "4Daagse2025_-_Dag_3_Toiletten_waypoints.gpx",
+      "type": "poi"
+    },
+    {
+      "fileName": "4Daagse2025_-_Dag_3_Watertappunten_waypoints.gpx",
+      "type": "poi"
+    },
+    {
+      "fileName": "4Daagse2025_-_Dag_4_30km_30km.gpx",
+      "type": "track"
+    },
+    {
+      "fileName": "4Daagse2025_-_Dag_4_40km_40km.gpx",
+      "type": "track"
+    },
+    {
+      "fileName": "4Daagse2025_-_Dag_4_40km_MIL_40kmM.gpx",
+      "type": "track"
+    },
+    {
+      "fileName": "4Daagse2025_-_Dag_4_50km_50km.gpx",
+      "type": "track"
+    },
+    {
+      "fileName": "4Daagse2025_-_Dag_4_Medische_verzorgingsposten_waypoints.gpx",
+      "type": "poi"
+    },
+    {
+      "fileName": "4Daagse2025_-_Dag_4_Toiletten_waypoints.gpx",
+      "type": "poi"
+    },
+    {
+      "fileName": "4Daagse2025_-_Dag_4_Waterpunten_waypoints.gpx",
+      "type": "poi"
+    }
+  ]
+}

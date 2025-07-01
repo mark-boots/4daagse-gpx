@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="4Daagse2025-Converter" 
+     xmlns="http://www.topografix.com/GPX/1/1"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+  <metadata>
+    <name>Toiletten - Waypoints</name>
+    <desc>Dag 1 - Blauwe Dinsdag - Toiletten</desc>
+    <time>2025-07-01T10:44:42.245Z</time>
+  </metadata>
+  <wpt lat="51.864943" lon="5.846939">
+    <name>Toilet locatie 1.1</name>
+    <desc>beschrijving: &lt;br&gt; Attributes&lt;br&gt;  Dag  1 &lt;br&gt;  Type  Toiletten &lt;br&gt;  Naam  Toilet locatie 1.1 &lt;br&gt;Dag: 1&lt;br&gt;Type: Toiletten&lt;br&gt;Naam: Toilet locatie 1.1</desc>
+    <type>Restroom</type>
+  </wpt>
+  <wpt lat="51.897847" lon="5.786385">
+    <name>Toilet locatie 1.2</name>
+    <desc>beschrijving: &lt;br&gt; Attributes&lt;br&gt;  Dag  1 &lt;br&gt;  Type  Toiletten &lt;br&gt;  Naam  Toilet locatie 1.2 &lt;br&gt;Dag: 1&lt;br&gt;Type: Toiletten&lt;br&gt;Naam: Toilet locatie 1.2</desc>
+    <type>Restroom</type>
+  </wpt>
+  <wpt lat="51.919259" lon="5.826026">
+    <name>Toilet locatie 1.3</name>
+    <desc>beschrijving: &lt;br&gt; Attributes&lt;br&gt;  Dag  1 &lt;br&gt;  Type  Toiletten &lt;br&gt;  Naam  Toilet locatie 1.3 &lt;br&gt;Dag: 1&lt;br&gt;Type: Toiletten&lt;br&gt;Naam: Toilet locatie 1.3</desc>
+    <type>Restroom</type>
+  </wpt>
+  <wpt lat="51.935009" lon="5.940633">
+    <name>Toilet locatie 1.4</name>
+    <desc>beschrijving: &lt;br&gt; Attributes&lt;br&gt;  Dag  1 &lt;br&gt;  Type  Toiletten &lt;br&gt;  Naam  Toilet locatie 1.4 &lt;br&gt;Dag: 1&lt;br&gt;Type: Toiletten&lt;br&gt;Naam: Toilet locatie 1.4</desc>
+    <type>Restroom</type>
+  </wpt>
+  <wpt lat="51.917192" lon="5.856166">
+    <name>Toilet locatie 1.5</name>
+    <desc>beschrijving: &lt;br&gt; Attributes&lt;br&gt;  Dag  1 &lt;br&gt;  Type  Toiletten &lt;br&gt;  Naam  Toilet locatie 1.5 &lt;br&gt;Dag: 1&lt;br&gt;Type: Toiletten&lt;br&gt;Naam: Toilet locatie 1.5</desc>
+    <type>Restroom</type>
+  </wpt>
+  <wpt lat="51.912395" lon="5.875461">
+    <name>Toilet locatie 1.6</name>
+    <desc>beschrijving: &lt;br&gt; Attributes&lt;br&gt;  Dag  1 &lt;br&gt;  Type  Toiletten &lt;br&gt;  Naam  Toilet locatie 1.6 &lt;br&gt;Dag: 1&lt;br&gt;Type: Toiletten&lt;br&gt;Naam: Toilet locatie 1.6</desc>
+    <type>Restroom</type>
+  </wpt>
+  <wpt lat="51.948219" lon="5.933567">
+    <name>Toilet locatie 1.7</name>
+    <desc>beschrijving: &lt;br&gt; Attributes&lt;br&gt;  Dag  1 &lt;br&gt;  Type  Toiletten &lt;br&gt;  Naam  Toilet locatie 1.7 &lt;br&gt;Dag: 1&lt;br&gt;Type: Toiletten&lt;br&gt;Naam: Toilet locatie 1.7</desc>
+    <type>Restroom</type>
+  </wpt>
+  <wpt lat="51.882756" lon="5.88699">
+    <name>Toilet locatie 1.8</name>
+    <desc>beschrijving: &lt;br&gt; Attributes&lt;br&gt;  Dag  1 &lt;br&gt;  Type  Toiletten &lt;br&gt;  Naam  Toilet locatie 1.8 &lt;br&gt;Dag: 1&lt;br&gt;Type: Toiletten&lt;br&gt;Naam: Toilet locatie 1.8</desc>
+    <type>Restroom</type>
+  </wpt>
+</gpx>
