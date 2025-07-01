@@ -13,4 +13,4 @@ xcopy public\* docs\ /E /Y
 
 Write-Host "✅ Files generated and copied to docs/ folder!" -ForegroundColor Green
 Write-Host "📝 You can now review/edit files in docs/ before deploying" -ForegroundColor Cyan
-Write-Host "🚀 When ready to deploy, run: .\deploy.ps1 'Your commit message'" -ForegroundColor Cyan
+Write-Host "🚀 When ready to deploy, run: .\scripts\deploy.ps1 'Your commit message'" -ForegroundColor Cyan

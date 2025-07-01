@@ -8,7 +8,7 @@ node_modules/
 gpx-output/
 
 # Local development batch scripts
-*.bat
+scripts/*.bat
 
 # Logs
 *.log
