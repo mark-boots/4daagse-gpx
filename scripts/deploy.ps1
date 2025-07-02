@@ -8,7 +8,12 @@ param(
 
 Write-Host "🚀 Deploying changes to GitHub Pages..." -ForegroundColor Green
 
-# Add all changes
+# Change to repository root directory
+$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$repoRoot = Split-Path -Parent $scriptDir
+Set-Location $repoRoot
+
+# Add all changes from repository root
 git add .
 
 # Commit with provided message
