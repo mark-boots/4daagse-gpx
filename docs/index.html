@@ -1,18 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>4Daagse 2025 Route Viewer</title>
+    <title>4Daagse GPX</title>
     
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8VKEJQ9E9E"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-8VKEJQ9E9E');
-    </script>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Bekijk en download GPX routes van de Nijmegen Vierdaagse. Interactieve kaart met alle wandelroutes voor het 4Daagse evenement.">
+    <meta name="keywords" content="4Daagse, Nijmegen, Vierdaagse, GPX, routes, wandelen, kaart, 2025, Nederland">
+    <meta name="author" content="4Daagse GPX">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://mark-boots.github.io/4daagse-gpx/">
+    
+    <!-- Open Graph / Facebook Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mark-boots.github.io/4daagse-gpx/">
+    <meta property="og:title" content="4Daagse GPX">
+    <meta property="og:description" content="Bekijk en download GPX routes van de Nijmegen Vierdaagse. Interactieve kaart met alle wandelroutes voor het 4Daagse evenement.">
+    <meta property="og:image" content="https://mark-boots.github.io/4daagse-gpx/og-image.png">
+    <meta property="og:locale" content="nl_NL">
+    <meta property="og:site_name" content="4Daagse GPX">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://mark-boots.github.io/4daagse-gpx/">
+    <meta name="twitter:title" content="4Daagse GPX">
+    <meta name="twitter:description" content="Bekijk en download GPX routes van de Nijmegen Vierdaagse. Interactieve kaart met alle wandelroutes voor het 4Daagse evenement.">
+    <meta name="twitter:image" content="https://mark-boots.github.io/4daagse-gpx/og-image.png">
+    
+    <!-- Additional SEO -->
+    <meta name="theme-color" content="#2563eb">
+    <link rel="icon" type="image/svg+xml" href="logo_icon.svg">
+    
+    <!-- Google Analytics will be loaded conditionally after cookie consent -->
     
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
@@ -52,10 +72,20 @@
             text-align: center;
         }
         
+        .sidebar-header .logo {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            margin-bottom: 0.75rem;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
         .sidebar-header h1 {
             font-size: 1.8rem;
             color: #ecf0f1;
-            margin-bottom: 0.5rem;
+            margin: 0 0 0.5rem 0;
         }
         
         .sidebar-header p {
@@ -465,6 +495,100 @@
                 font-size: 1.5rem;
             }
         }
+
+        /* Cookie Consent Banner */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(44, 62, 80, 0.98);
+            color: white;
+            padding: 1rem;
+            z-index: 10000;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            backdrop-filter: blur(10px);
+            border-top: 3px solid #3498db;
+        }
+        
+        .cookie-banner.show {
+            transform: translateY(0);
+        }
+        
+        .cookie-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        
+        .cookie-text {
+            flex: 1;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        .cookie-text a {
+            color: #3498db;
+            text-decoration: underline;
+        }
+        
+        .cookie-buttons {
+            display: flex;
+            gap: 0.75rem;
+            flex-shrink: 0;
+        }
+        
+        .cookie-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        
+        .cookie-btn.accept {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .cookie-btn.accept:hover {
+            background: #229954;
+        }
+        
+        .cookie-btn.decline {
+            background: transparent;
+            color: #bdc3c7;
+            border: 1px solid #7f8c8d;
+        }
+        
+        .cookie-btn.decline:hover {
+            background: #7f8c8d;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .cookie-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .cookie-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .cookie-btn {
+                flex: 1;
+                max-width: 120px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -472,8 +596,9 @@
         <!-- Sidebar -->
         <div class="sidebar">
             <div class="sidebar-header">
-                <h1>4Daagse 2025</h1>
-                <p>Route en GPX download</p>
+                <img src="logo.png" alt="4Daagse GPX Logo" class="logo">
+                <h1>4Daagse GPX</h1>
+                <p>2025 Route en GPX downloads</p>
                 <button class="settings-btn" id="settingsBtn" title="Instellingen">
                     <i class="material-icons">settings</i>
                 </button>
@@ -1024,6 +1149,70 @@
             </div>
         </div>
     </div>
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookieBanner" class="cookie-banner">
+        <div class="cookie-content">
+            <div class="cookie-text">
+                🍪 Deze website gebruikt Google Analytics cookies om bezoekersstatistieken te verzamelen. 
+                Door op "Accepteren" te klikken, geef je toestemming voor het gebruik van cookies conform de GDPR wetgeving.
+            </div>
+            <div class="cookie-buttons">
+                <button class="cookie-btn decline" onclick="declineCookies()">Weigeren</button>
+                <button class="cookie-btn accept" onclick="acceptCookies()">Accepteren</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Cookie consent management
+        function checkCookieConsent() {
+            const consent = localStorage.getItem('cookieConsent');
+            if (consent === null) {
+                // Show banner after a short delay
+                setTimeout(() => {
+                    document.getElementById('cookieBanner').classList.add('show');
+                }, 1000);
+            } else if (consent === 'accepted') {
+                // Initialize Google Analytics
+                initializeGoogleAnalytics();
+            }
+        }
+        
+        function acceptCookies() {
+            localStorage.setItem('cookieConsent', 'accepted');
+            document.getElementById('cookieBanner').classList.remove('show');
+            initializeGoogleAnalytics();
+        }
+        
+        function declineCookies() {
+            localStorage.setItem('cookieConsent', 'declined');
+            document.getElementById('cookieBanner').classList.remove('show');
+            // Disable Google Analytics
+            window['ga-disable-G-8VKEJQ9E9E'] = true;
+        }
+        
+        function initializeGoogleAnalytics() {
+            // Only initialize if not already loaded
+            if (!window.gtag) {
+                // Create and load the Google Analytics script
+                const script = document.createElement('script');
+                script.async = true;
+                script.src = 'https://www.googletagmanager.com/gtag/js?id=G-8VKEJQ9E9E';
+                document.head.appendChild(script);
+                
+                // Initialize gtag
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                window.gtag = gtag;
+                gtag('js', new Date());
+                gtag('config', 'G-8VKEJQ9E9E');
+            }
+        }
+        
+        // Check consent when page loads
+        document.addEventListener('DOMContentLoaded', checkCookieConsent);
+    </script>
 
 </body>
 </html>
